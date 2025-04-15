@@ -96,4 +96,31 @@ router.get('/:id', protect, async (req, res) => {
   }
 });
 
+// PUBLIC ENDPOINT: Search FIR by FIR number (no authentication required)
+router.get('/search/:firNumber', async (req, res) => {
+  try {
+    const { firNumber } = req.params;
+    console.log('Searching for FIR number:', firNumber);
+    
+    if (!firNumber) {
+      return res.status(400).json({ message: 'FIR number is required' });
+    }
+    
+    // Find FIR by its number (public information + description)
+    const fir = await FIR.findOne({ firNumber }).select(
+      'firNumber incidentType incidentDate incidentLocation description accusedName status createdAt statusUpdateDate'
+    );
+    
+    if (!fir) {
+      return res.status(404).json({ message: 'No FIR found with this number' });
+    }
+    
+    // Return public information with description
+    res.json(fir);
+  } catch (error) {
+    console.error('Error searching for FIR:', error);
+    res.status(500).json({ message: 'Error searching for FIR', error: error.message });
+  }
+});
+
 module.exports = router;

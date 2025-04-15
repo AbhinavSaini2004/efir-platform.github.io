@@ -93,15 +93,16 @@ const loginUser = async (req, res) => {
       { expiresIn: '30d' }
     );
 
-    // Send back user data and token
+    // Send back user data and token with phone included
     res.status(200).json({
       message: 'User logged in successfully',
       user: {
         id: user._id,
         name: user.name,
         email: user.email,
+        phone: user.phone,  // Added phone number
+        aadhar: user.aadhar, // Added aadhar number
         role: user.role
-        // Add any other non-sensitive user fields you need
       },
       token
     });
