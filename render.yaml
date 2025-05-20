@@ -14,7 +14,7 @@ services:
         value: http://localhost:3000
       - key: JWT_SECRET
         value: your-long-jwt-secret
-    plan: free
+    
 
   - type: web
     name: efir-admin
@@ -31,7 +31,7 @@ services:
         value: government.gov.in
       - key: MONGO_URI
         value: your-mongodb-uri
-    plan: free
+   
 
   - type: web
     name: efir-citizen
@@ -42,4 +42,4 @@ services:
     envVars:
       - key: REACT_APP_API_URL
         value: http://localhost:5001/api
-    plan: free
+    
