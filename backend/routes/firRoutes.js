@@ -76,25 +76,7 @@ router.get('/', protect, async (req, res) => {
   }
 });
 
-// Get FIR details by ID
-router.get('/:id', protect, async (req, res) => {
-  try {
-    const fir = await FIR.findById(req.params.id);
-    if (!fir) {
-      return res.status(404).json({ message: 'FIR not found' });
-    }
-    
-    // Ensure user can only access their own FIRs
-    if (fir.user.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ message: 'Not authorized to access this FIR' });
-    }
-    
-    res.json(fir);
-  } catch (error) {
-    console.error('Error fetching FIR details:', error);
-    res.status(500).json({ message: 'Error fetching FIR', error: error.message });
-  }
-});
+
 
 // PUBLIC ENDPOINT: Search FIR by FIR number (no authentication required)
 router.get('/search/:firNumber', async (req, res) => {
@@ -122,5 +104,23 @@ router.get('/search/:firNumber', async (req, res) => {
     res.status(500).json({ message: 'Error searching for FIR', error: error.message });
   }
 });
-
+// Get FIR details by ID
+router.get('/:id', protect, async (req, res) => {
+  try {
+    const fir = await FIR.findById(req.params.id);
+    if (!fir) {
+      return res.status(404).json({ message: 'FIR not found' });
+    }
+    
+    // Ensure user can only access their own FIRs
+    if (fir.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: 'Not authorized to access this FIR' });
+    }
+    
+    res.json(fir);
+  } catch (error) {
+    console.error('Error fetching FIR details:', error);
+    res.status(500).json({ message: 'Error fetching FIR', error: error.message });
+  }
+});
 module.exports = router;
