@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/07eb4ee3-951a-4fe2-b942-289a31e926b4" width="150" />
+</p>
+
 # EFIR Management Portal 🚨
 
 ## EFIR Portal(Registering FIR to Checking Status)
