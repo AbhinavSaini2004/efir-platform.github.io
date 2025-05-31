@@ -10,17 +10,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5001; // <--- CHANGE THE DEFAULT FALLBACK
 
-cosnt app=express();
-app(cors(
-  {
-    origin : ["https://efir-platform-github-io.vercel.app/"],
-    methods : ["POST","GET"],
-    credentials : true
-    
-  }
-));
-
-
 // --- CORS Configuration ---
 // Use the 'cors' middleware package. This should be one of the first middleware.
 // It handles preflight OPTIONS requests automatically.
